@@ -25,6 +25,9 @@ import com.zhchmmx.welearn.resources.compose_multiplatform
 @DevelopmentEntryPoint
 fun App() {
     MaterialTheme {
-
+        val backstack = remember { mutableStateListOf<Any> }
+        NavDisplay(
+            backstack = backstack
+        )
     }
 }
