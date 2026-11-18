@@ -1,33 +1,30 @@
 package com.zhchmmx.welearn
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation3.runtime.NavKey
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.ui.NavDisplay
+import com.zhchmmx.welearn.routes.Login
+import com.zhchmmx.welearn.screens.MainScreen
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
-import org.jetbrains.compose.resources.painterResource
-
-import com.zhchmmx.welearn.resources.Res
-import com.zhchmmx.welearn.resources.compose_multiplatform
+import com.zhchmmx.welearn.routes.Main
+import com.zhchmmx.welearn.screens.LoginScreen
 
 @Composable
 @Preview
 @DevelopmentEntryPoint
 fun App() {
     MaterialTheme {
-        val backstack = remember { mutableStateListOf<Any> }
+        val backstack = remember { mutableStateListOf<NavKey>(Main) }
         NavDisplay(
-            backstack = backstack
+            backStack = backstack,
+            onBack = { backstack.removeLastOrNull() },
+            entryProvider = entryProvider {
+                entry<Main> { MainScreen() }
+                entry<Login> { LoginScreen() }
+            }
         )
     }
 }

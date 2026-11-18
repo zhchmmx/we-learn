@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">主页</string>
+    <string name="documents">文档</string>
+    <string name="ai">AI</string>
+    <string name="quizzes">测验</string>
+    <string name="profile">我的</string>
+    <string name="login">登录</string>
+    <string name="loginWelcome">登录您的 We Apps 账号</string>
+    <string name="signUp">注册账号</string>
+    <string name="email">电子邮件</string>
+    <string name="password">密码</string>
+    <string name="restore_failed">会话恢复失败，请重新登录</string>
+    <string name="login_failed">登录失败，请检查邮箱和密码</string>
+    <string name="login_input_empty">请输入邮箱和密码</string>
+    <string name="sign_out_failed">登出失败，请重试</string>
+    <string name="settings">设置</string>
+    <string name="sign_out">退出登录</string>
+    <string name="newTextNote">新建文字笔记</string>
+    <string name="newHandwrittenNote">新建手写笔记</string>
+    <string name="uploadDocument">上传文档</string>
+</resources>

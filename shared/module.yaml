@@ -14,7 +14,10 @@ dependencies:
   - $libs.androidx.lifecycle.runtime.compose
   - $libs.androidx.navigation3.runtime
   - $libs.androidx.navigation3.ui
-  - $libs.androidx.material3.adaptive.navigation3
+  - $libs.compose.material3.adaptive.navigation.suite
+  - $libs.compose.material3.adaptive.navigation3
+  - $libs.compose.material.icons.core
+  - $libs.compose.material.icons.extended
 
 
 dependencies@android:
@@ -27,3 +30,5 @@ settings:
       packageName: com.zhchmmx.welearn.resources
       # Generate public accessors so other modules (and previews) can use Res.*
       exposedAccessors: true
+  kotlin: 
+    serialization: enabled
