@@ -23,7 +23,15 @@ fun App() {
             onBack = { backstack.removeLastOrNull() },
             entryProvider = entryProvider {
                 entry<Main> { MainScreen() }
-                entry<Login> { LoginScreen() }
+                entry<Login> {
+                    LoginScreen(
+                        onLogin = { _, _ ->
+                            // TODO：认证逻辑未接入，点击登录直接回到 Main
+                            backstack.removeLastOrNull()
+                            if (backstack.isEmpty()) backstack.add(Main)
+                        }
+                    )
+                }
             }
         )
     }
