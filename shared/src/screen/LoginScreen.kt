@@ -19,9 +19,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedSecureTextField
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -33,7 +36,9 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhchmmx.welearn.network.dto.AppwriteError
 import com.zhchmmx.welearn.resources.Res
 import com.zhchmmx.welearn.resources.email
@@ -56,20 +61,21 @@ private const val SIGN_UP_URL = "https://account.08012026.xyz/register"
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
-    isLoading: Boolean = false,
     userViewModel: UserViewModel
 ) {
+    val snackbarHostState = remember { SnackbarHostState() }
     Scaffold(
         modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
                 title = { Text(text = stringResource(Res.string.login)) })
-        }
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { innerPadding ->
         LoginContent(
             modifier = Modifier.padding(innerPadding),
-            isLoading = isLoading,
-            userViewModel = userViewModel
+            userViewModel = userViewModel,
+            snackbarHostState = snackbarHostState
         )
     }
 }
@@ -77,22 +83,26 @@ fun LoginScreen(
 @Composable
 private fun LoginContent(
     modifier: Modifier = Modifier,
-    isLoading: Boolean,
-    userViewModel: UserViewModel
+    userViewModel: UserViewModel,
+    snackbarHostState: SnackbarHostState
 ) {
     val uriHandler = LocalUriHandler.current
     val emailState = rememberTextFieldState()
     val passwordState = rememberTextFieldState()
     val passwordFocusRequester = remember { FocusRequester() }
+    val isLoading: Boolean by userViewModel.isLoading.collectAsStateWithLifecycle()
     val submit = {
         userViewModel.viewModelScope.launch {
             try {
                 userViewModel.login(emailState.text.toString(), passwordState.text.toString())
             } catch (e: ClientRequestException) {
                 val message = e.response.body<AppwriteError>()
+                snackbarHostState.showSnackbar(message.message)
+
             }
         }
     }
+
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
