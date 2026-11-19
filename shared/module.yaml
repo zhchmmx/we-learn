@@ -2,7 +2,7 @@ product:
   type: kmp/lib
   platforms: [ jvm, android, iosArm64, iosSimulatorArm64 ]
 
-# 国内镜像：用默认仓库的同名 id 覆盖，而不是新增仓库
+
 repositories:
   - id: mavenGoogle
     url: https://maven.aliyun.com/repository/google
@@ -25,6 +25,14 @@ dependencies:
   - $libs.compose.material3.adaptive.navigation3
   - $libs.compose.material.icons.core
   - $libs.compose.material.icons.extended
+  - $kotlin.serialization.core
+  - bom: $libs.ktor.bom
+  - $libs.ktor.client.core
+  - $libs.ktor.client.engine.defaults
+  - $libs.ktor.client.content.negotiation
+  - $libs.ktor.client.auth
+  - $libs.ktor.serialization.kotlinx.json
+  - $libs.ktor.client.logging
 
 
 dependencies@android:
