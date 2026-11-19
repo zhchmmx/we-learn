@@ -1,5 +1,12 @@
 product: jvm/app
 
+# 国内镜像：用默认仓库的同名 id 覆盖，而不是新增仓库
+repositories:
+  - id: mavenGoogle
+    url: https://maven.aliyun.com/repository/google
+  - id: mavenCentral
+    url: https://maven.aliyun.com/repository/central
+
 dependencies:
   - //shared
   - $compose.desktop.currentOs
