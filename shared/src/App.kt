@@ -6,11 +6,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.zhchmmx.welearn.routes.Login
-import com.zhchmmx.welearn.screens.MainScreen
+import com.zhchmmx.welearn.route.Login
+import com.zhchmmx.welearn.screen.MainScreen
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
-import com.zhchmmx.welearn.routes.Main
-import com.zhchmmx.welearn.screens.LoginScreen
+import com.zhchmmx.welearn.route.Main
+import com.zhchmmx.welearn.screen.LoginScreen
 
 @Composable
 @Preview
@@ -20,7 +20,7 @@ fun App() {
         val backstack = remember { mutableStateListOf<NavKey>(Main) }
         NavDisplay(
             backStack = backstack,
-            onBack = { backstack.removeLastOrNull() },
+            onBack = { backstack.removeLastOrNull() },//TODO 考虑要不要删掉这个，这样从这里吞掉返回。
             entryProvider = entryProvider {
                 entry<Main> { MainScreen() }
                 entry<Login> {

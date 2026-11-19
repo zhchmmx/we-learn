@@ -1,4 +1,4 @@
-package com.zhchmmx.welearn.screens
+package com.zhchmmx.welearn.screen
 
 import androidx.compose.runtime.Composable
 

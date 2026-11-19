@@ -1,4 +1,4 @@
-package com.zhchmmx.welearn.screens
+package com.zhchmmx.welearn.screen
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.navigationsuite.NavigationSuiteScaffold
@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.zhchmmx.welearn.routes.navItems
+import com.zhchmmx.welearn.route.navItems
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
