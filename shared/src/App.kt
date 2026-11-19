@@ -3,6 +3,8 @@ package com.zhchmmx.welearn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
@@ -11,6 +13,7 @@ import com.zhchmmx.welearn.screen.MainScreen
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
 import com.zhchmmx.welearn.route.Main
 import com.zhchmmx.welearn.screen.LoginScreen
+import com.zhchmmx.welearn.viewmodel.UserViewModel
 
 @Composable
 @Preview
@@ -18,19 +21,30 @@ import com.zhchmmx.welearn.screen.LoginScreen
 fun App() {
     MaterialTheme {
         val backstack = remember { mutableStateListOf<NavKey>(Main) }
+        val userViewModel = viewModel { UserViewModel() }
+        val user by userViewModel.user.collectAsStateWithLifecycle()
+        LaunchedEffect(user != null) {
+            if (user == null) {
+                backstack.add(Login)
+            }
+            else if (user != null) {
+                backstack.removeLastOrNull()
+                if (backstack.isEmpty()) {
+                    backstack.add(Main)
+                }
+            }
+        }
         NavDisplay(
             backStack = backstack,
-            onBack = { backstack.removeLastOrNull() },//TODO 考虑要不要删掉这个，这样从这里吞掉返回。
+            onBack = {
+                if (backstack.lastOrNull() != Login) {
+                    backstack.removeLastOrNull()
+                }
+            },
             entryProvider = entryProvider {
                 entry<Main> { MainScreen() }
                 entry<Login> {
-                    LoginScreen(
-                        onLogin = { _, _ ->
-                            // TODO：认证逻辑未接入，点击登录直接回到 Main
-                            backstack.removeLastOrNull()
-                            if (backstack.isEmpty()) backstack.add(Main)
-                        }
-                    )
+                    LoginScreen(userViewModel = userViewModel)
                 }
             }
         )

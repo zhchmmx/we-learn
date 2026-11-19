@@ -24,6 +24,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -32,21 +33,31 @@ import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
+import com.zhchmmx.welearn.network.dto.AppwriteError
 import com.zhchmmx.welearn.resources.Res
 import com.zhchmmx.welearn.resources.email
 import com.zhchmmx.welearn.resources.login
 import com.zhchmmx.welearn.resources.loginWelcome
 import com.zhchmmx.welearn.resources.password
 import com.zhchmmx.welearn.resources.signUp
+import com.zhchmmx.welearn.viewmodel.UserViewModel
+import io.ktor.client.call.body
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.statement.bodyAsText
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 
 private const val SIGN_UP_URL = "https://account.08012026.xyz/register"
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
     isLoading: Boolean = false,
-    onLogin: (email: String, password: String) -> Unit = { _, _ -> }
+    userViewModel: UserViewModel
 ) {
     Scaffold(
         modifier = modifier,
@@ -58,7 +69,7 @@ fun LoginScreen(
         LoginContent(
             modifier = Modifier.padding(innerPadding),
             isLoading = isLoading,
-            onLogin = onLogin
+            userViewModel = userViewModel
         )
     }
 }
@@ -67,14 +78,20 @@ fun LoginScreen(
 private fun LoginContent(
     modifier: Modifier = Modifier,
     isLoading: Boolean,
-    onLogin: (email: String, password: String) -> Unit
+    userViewModel: UserViewModel
 ) {
     val uriHandler = LocalUriHandler.current
     val emailState = rememberTextFieldState()
     val passwordState = rememberTextFieldState()
     val passwordFocusRequester = remember { FocusRequester() }
     val submit = {
-        onLogin(emailState.text.toString(), passwordState.text.toString())
+        userViewModel.viewModelScope.launch {
+            try {
+                userViewModel.login(emailState.text.toString(), passwordState.text.toString())
+            } catch (e: ClientRequestException) {
+                val message = e.response.body<AppwriteError>()
+            }
+        }
     }
     Box(
         modifier = modifier.fillMaxSize(),
@@ -113,7 +130,7 @@ private fun LoginContent(
                 }
             )
             Row {
-                Button(onClick = submit) {
+                Button(onClick = { submit() }) {
                     Text(text = stringResource(Res.string.login))
                 }
                 TextButton(
