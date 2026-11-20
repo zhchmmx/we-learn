@@ -1,7 +1,7 @@
-package com.zhchmmx.welearn.viewmodel
+package com.zhchmmx.welearn.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.zhchmmx.welearn.model.User
+import com.zhchmmx.welearn.ui.model.User
 import com.zhchmmx.welearn.service.AuthService
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

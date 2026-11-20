@@ -8,12 +8,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.ui.NavDisplay
-import com.zhchmmx.welearn.route.Login
-import com.zhchmmx.welearn.screen.MainScreen
+import com.zhchmmx.welearn.ui.route.Login
+import com.zhchmmx.welearn.ui.screeen.MainScreen
 import org.jetbrains.compose.reload.DevelopmentEntryPoint
-import com.zhchmmx.welearn.route.Main
-import com.zhchmmx.welearn.screen.LoginScreen
-import com.zhchmmx.welearn.viewmodel.UserViewModel
+import com.zhchmmx.welearn.ui.route.Main
+import com.zhchmmx.welearn.ui.screeen.LoginScreen
+import com.zhchmmx.welearn.ui.viewmodel.UserViewModel
 
 @Composable
 @Preview

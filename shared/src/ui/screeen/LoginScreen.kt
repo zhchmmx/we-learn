@@ -1,4 +1,4 @@
-package com.zhchmmx.welearn.screen
+package com.zhchmmx.welearn.ui.screeen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.awaitEachGesture
@@ -38,7 +38,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.zhchmmx.welearn.network.dto.AppwriteError
 import com.zhchmmx.welearn.resources.Res
 import com.zhchmmx.welearn.resources.email
@@ -46,12 +45,9 @@ import com.zhchmmx.welearn.resources.login
 import com.zhchmmx.welearn.resources.loginWelcome
 import com.zhchmmx.welearn.resources.password
 import com.zhchmmx.welearn.resources.signUp
-import com.zhchmmx.welearn.viewmodel.UserViewModel
+import com.zhchmmx.welearn.ui.viewmodel.UserViewModel
 import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
-import io.ktor.client.statement.bodyAsText
-import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 

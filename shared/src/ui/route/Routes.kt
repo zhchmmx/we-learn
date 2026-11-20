@@ -1,4 +1,4 @@
-package com.zhchmmx.welearn.route
+package com.zhchmmx.welearn.ui.route
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AutoAwesome

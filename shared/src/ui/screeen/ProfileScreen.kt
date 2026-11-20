@@ -1,4 +1,4 @@
-package com.zhchmmx.welearn.screen
+package com.zhchmmx.welearn.ui.screeen
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LargeTopAppBar

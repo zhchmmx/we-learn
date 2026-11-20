@@ -1,6 +1,6 @@
 package com.zhchmmx.welearn.service
 
-import com.zhchmmx.welearn.model.User
+import com.zhchmmx.welearn.ui.model.User
 import com.zhchmmx.welearn.network.repository.AuthRepository
 
 class AuthService {
