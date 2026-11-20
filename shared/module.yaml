@@ -33,8 +33,6 @@ dependencies:
   - $libs.ktor.client.auth
   - $libs.ktor.serialization.kotlinx.json
   - $libs.ktor.client.logging
-  - $libs.koog.agents
-  - $libs.koog.agents.additions
 
 
 dependencies@android:
