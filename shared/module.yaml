@@ -33,6 +33,7 @@ dependencies:
   - $libs.ktor.client.auth
   - $libs.ktor.serialization.kotlinx.json
   - $libs.ktor.client.logging
+  - $libs.ag.ui.kotlin.client
 
 
 dependencies@android:
