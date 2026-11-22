@@ -10,7 +10,7 @@ private const val AGENT_BASE_URL = "https://agent.welearn.08012026.xyz/agents/ch
 
 class AgentService() {
     private val authRepository = AuthRepository()
-    val agent = AgUiAgent(AGENT_BASE_URL)
+    private lateinit var agent: AgUiAgent
 
     var conversationId: String? = null
         private set
@@ -19,7 +19,10 @@ class AgentService() {
         private set
 
     private suspend fun initialize() {
-        agent.config.bearerToken = authRepository.createJwt()
+        val jwt = authRepository.createJwt()
+        agent = AgUiAgent(AGENT_BASE_URL){
+            bearerToken = jwt
+        }
         threadId = "${authRepository.getAccount().id}_${conversationId!!}"
     }
 
