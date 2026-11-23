@@ -19,4 +19,7 @@
     <string name="newTextNote">新建文字笔记</string>
     <string name="newHandwrittenNote">新建手写笔记</string>
     <string name="uploadDocument">上传文档</string>
+    <string name="openConversationList">打开对话列表</string>
+    <string name="newConversation">新建对话</string>
+    <string name="send">发送</string>
 </resources>

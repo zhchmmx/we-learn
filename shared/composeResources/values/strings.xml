@@ -19,4 +19,7 @@
     <string name="newTextNote">New Text Note</string>
     <string name="newHandwrittenNote">New Handwritten Note</string>
     <string name="uploadDocument">Upload Document</string>
+    <string name="openConversationList">Open Conversation List</string>
+    <string name="newConversation">New Conversation</string>
+    <string name="send">Send</string>
 </resources>
